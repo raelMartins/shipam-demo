@@ -1,0 +1,32 @@
+.auth_navbar {
+  .login_buttons {
+    .button {
+      border-radius: 0.64rem;
+      // color: var(--shipam-primary-red);
+      border: 0.1rem solid var(--shipam-primary-red);
+      font-size: 1.6rem;
+      line-height: 2.2rem;
+      font-weight: 400;
+      padding: 2rem;
+      opacity: 0.9;
+      font-family: var(--font_segoe);
+      text-decoration: none;
+    }
+    .button:nth-child(1) {
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: white;
+        opacity: 1;
+      }
+    }
+    .button:nth-child(2) {
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: var(--shipam-primary-red);
+        opacity: 1;
+      }
+    }
+  }
+}
