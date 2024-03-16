@@ -10,9 +10,12 @@ export const BasicFooter = () => {
       color={'#fff'}
     >
       <Flex
-        w={{ base: '90%', md: '80%' }}
+        // w={{ base: '90%', md: '80%' }}
         m={'0px auto'}
         justify={'space-between'}
+        maxWidth={'148.4rem'}
+        width={'100%'}
+        margin="0rem auto"
       >
         &copy; {new Date(Date.now()).getFullYear()} Shipam
       </Flex>
