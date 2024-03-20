@@ -16,6 +16,7 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { FormErrorWrapper } from 'components/forms/FormErrorWrapper';
+import { Checkbox } from 'components/widgets/widgets';
 import { Form, useFormik } from 'formik';
 import { useEffect } from 'react';
 import { segoe } from 'utils/helpers/fonts';
@@ -36,20 +37,20 @@ export const AuthForm = ({ type = 'sign_in' }) => {
 
   const formSchema = Yup.object().shape({
     email: Yup.string().required('Please enter your email'),
-    first_name:
+    firstname:
       type !== 'sign_up'
         ? Yup.string()
         : Yup.string().required('Please enter your first name'),
-    last_name:
+    lastname:
       type !== 'sign_up'
         ? Yup.string()
         : Yup.string().required('Please enter your last name'),
-    phone:
+    phone_number:
       type !== 'sign_up'
         ? Yup.string()
         : Yup.string().required('Please enter your phone number'),
     password: Yup.string().required('Please enter your password'),
-    password_confirm:
+    password_confirmation:
       type !== 'sign_up'
         ? Yup.string()
         : Yup.string().required('Please confirm your password')
@@ -60,7 +61,17 @@ export const AuthForm = ({ type = 'sign_in' }) => {
       let res = await axios({
         method: 'POST',
         url: `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
-        data: { email: values.email, password: values.password }
+        // data: { email: values.email, password: values.password },
+        data: {
+          user_type: 'buyer',
+          firstname: values.firstname,
+          lastname: values.lastname,
+          phone_number: values.phone_number,
+          email: values.email,
+          password: values.password,
+          password_confirmation: values.password_confirmation,
+          agree_terms: 1
+        }
       });
       console.log(res);
     } catch (err: any) {
@@ -85,11 +96,11 @@ export const AuthForm = ({ type = 'sign_in' }) => {
   const formik = useFormik({
     initialValues: {
       email: '',
-      first_name: '',
-      last_name: '',
-      phone: '',
+      firstname: '',
+      lastname: '',
+      phone_number: '',
       password: '',
-      password_confirm: ''
+      password_confirmation: ''
     },
     // onSubmit: (values) => {
     //   type === 'sign_up' ? signup : login;
@@ -184,9 +195,9 @@ export const AuthForm = ({ type = 'sign_in' }) => {
                       // onChange={() => {
                       //   console.log(formik);
                       // }}
-                      onChange={formik.handleChange('first_name')}
-                      value={formik.values.first_name}
-                      error={formik.errors.first_name}
+                      onChange={formik.handleChange('firstname')}
+                      value={formik.values.firstname}
+                      error={formik.errors.firstname}
                       border=".1rem solid #DEE2E6"
                     />
                   </VStack>
@@ -206,9 +217,9 @@ export const AuthForm = ({ type = 'sign_in' }) => {
                       borderRadius=".64rem"
                       padding="1.6rem"
                       fontSize="1.4rem"
-                      onChange={formik.handleChange('last_name')}
-                      value={formik.values.last_name}
-                      error={formik.errors.last_name}
+                      onChange={formik.handleChange('lastname')}
+                      value={formik.values.lastname}
+                      error={formik.errors.lastname}
                       border=".1rem solid #DEE2E6"
                     />
                   </VStack>
@@ -251,9 +262,9 @@ export const AuthForm = ({ type = 'sign_in' }) => {
                     borderRadius=".64rem"
                     padding="1.6rem"
                     fontSize="1.4rem"
-                    onChange={formik.handleChange('phone')}
-                    value={formik.values.phone}
-                    error={formik.errors.phone}
+                    onChange={formik.handleChange('phone_number')}
+                    value={formik.values.phone_number}
+                    error={formik.errors.phone_number}
                     border=".1rem solid #DEE2E6"
                   />
                 </VStack>
@@ -295,12 +306,15 @@ export const AuthForm = ({ type = 'sign_in' }) => {
                     borderRadius=".64rem"
                     padding="1.6rem"
                     fontSize="1.4rem"
-                    onChange={formik.handleChange('password_confirm')}
-                    value={formik.values.password_confirm}
-                    error={formik.errors.password_confirm}
+                    onChange={formik.handleChange('password_confirmation')}
+                    value={formik.values.password_confirmation}
+                    error={formik.errors.password_confirmation}
                     border=".1rem solid #DEE2E6"
                   />
                 </VStack>
+                <Flex align="center" gap="1rem">
+                  <Checkbox /> I agree to the terms of service
+                </Flex>
               </>
             )}
             <Button

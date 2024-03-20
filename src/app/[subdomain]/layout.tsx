@@ -1,3 +1,4 @@
+// { params }: { params: { subdomain: string } }
 import {
   Box,
   Breadcrumb,
@@ -13,13 +14,15 @@ import { LoggedInNavbar } from 'layouts/navbars/LoggedInNavbar';
 import { Navigation } from 'layouts/navbars/Navigation';
 
 export default function ShopLayout({
-  children // will be a page or nested layout
+  children, // will be a page or nested layout
+  params
 }: {
   children: React.ReactNode;
+  params: { subdomain: string };
 }) {
   return (
     <Flex minH={'100vh'} direction="column">
-      <LoggedInNavbar type="buyer" />
+      <LoggedInNavbar type={params.subdomain} />
       <Flex
         direction={'column'}
         flex={'1'}
