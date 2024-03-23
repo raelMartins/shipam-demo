@@ -105,11 +105,11 @@ export const ProductOverview = () => {
           border=".1rem solid #BDC1C8"
           borderRadius={'.4rem'}
           templateColumns={'repeat(4, 1fr)'}
-          p="1rem"
+          py="1rem"
         >
           <VStack
             alignItems="flex-start"
-            px="2rem"
+            px="1rem"
             borderRight={'.1rem solid #BDC1C8'}
           >
             <Text
@@ -120,31 +120,31 @@ export const ProductOverview = () => {
             >
               $118.00
             </Text>
-            <Text fontSize={'1.3rem'} color="#606060">
+            <Text fontSize={'1.3rem'} color="#606060" minW={'max-content'}>
               1 pc
             </Text>
           </VStack>
           <VStack
             alignItems="flex-start"
-            px="2rem"
+            px="1rem"
             borderRight={'.1rem solid #BDC1C8'}
           >
             <Text fontSize={'1.8rem'} lineHeight={'2.2rem'} fontWeight={'600'}>
               $98.00
             </Text>
-            <Text fontSize={'1.3rem'} color="#606060">
+            <Text fontSize={'1.3rem'} color="#606060" minW={'max-content'}>
               50 - 100 pcs
             </Text>
           </VStack>
           <VStack
             alignItems="flex-start"
-            px="2rem"
+            px="1rem"
             borderRight={'.1rem solid #BDC1C8'}
           >
             <Text fontSize={'1.8rem'} lineHeight={'2.2rem'} fontWeight={'600'}>
               $90.00
             </Text>
-            <Text fontSize={'1.3rem'} color="#606060">
+            <Text fontSize={'1.3rem'} color="#606060" minW={'max-content'}>
               100 - 700 pcs
             </Text>
           </VStack>
@@ -152,7 +152,7 @@ export const ProductOverview = () => {
             <Text fontSize={'1.8rem'} lineHeight={'2.2rem'} fontWeight={'600'}>
               $78.00
             </Text>
-            <Text fontSize={'1.3rem'} color="#606060">
+            <Text fontSize={'1.3rem'} color="#606060" minW={'max-content'}>
               700+ pcs
             </Text>
           </VStack>

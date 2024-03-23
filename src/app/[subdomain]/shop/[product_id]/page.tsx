@@ -2,6 +2,7 @@ import { Box, Flex, VStack } from '@chakra-ui/react';
 import { SidebarFilters } from 'components/shop/SidebarFilters';
 import { SearchListingCard } from 'components/shop/cards/SearchListingCard';
 import { ProductOverview } from 'components/shop/product/ProductOverview';
+import { ProductTabs } from 'components/shop/product/ProductTabs';
 import { RelatedProducts } from 'components/shop/promotions/RelatedProducts';
 import { YouMayLikeSidebar } from 'components/shop/promotions/YouMayLikeSideBar';
 
@@ -16,8 +17,10 @@ export default function ShipamProductPage({}) {
           bg="#FFFFFF"
           borderRadius={'.4rem'}
           border=".1rem solid #DEE2E7"
-          // h="100%"
-        ></Box>
+          box-shadow="0px 1px 3px 0px #3838381A"
+        >
+          <ProductTabs />
+        </Box>
         <YouMayLikeSidebar />
       </Flex>
       <RelatedProducts />

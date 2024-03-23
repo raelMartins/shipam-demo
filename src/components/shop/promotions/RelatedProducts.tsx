@@ -25,7 +25,7 @@ export const RelatedProducts = () => {
       >
         Related Products
       </Text>
-      <Grid templateColumns={'repeat(6, 1fr)'}>
+      <Grid templateColumns={'repeat(6, 1fr)'} gap={'2rem'}>
         {Array(6)
           .fill('')
           .map((el, i) => (
