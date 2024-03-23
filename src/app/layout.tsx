@@ -3,6 +3,12 @@ import { inter, segoe } from 'utils/helpers/fonts';
 import { ChakraProvider } from '@chakra-ui/react';
 
 import 'styles/globals.scss';
+import { current_theme } from 'theme';
+import { useState } from 'react';
+import { colors_object } from 'theme/colors';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // const inter = Inter({ subsets: ['latin'] });
 
@@ -16,12 +22,29 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // const [theme_name, set_theme_name] = useState<'light' | 'dark' | 'default'>(
+  //   'light'
+  // );
+  const theme_name = 'light';
+
+  // const theme = current_theme(theme_name);
   return (
     <html lang="en">
       <body
         className={`${segoe.variable} ${inter.variable} ${inter.className}`}
       >
         <ChakraProvider>{children}</ChakraProvider>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={true}
+          newestOnTop={true}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          theme="colored"
+        />
       </body>
     </html>
   );

@@ -1,23 +1,30 @@
-import { Badge, Box, Button, Flex, Link } from '@chakra-ui/react';
+'use client';
+import { Badge, Box, Button, Flex } from '@chakra-ui/react';
 import { ShipamLogoDefault } from 'components/design_icons';
-import styles from './authnavbar.module.scss';
+import styles from './loggedoutnavbar.module.scss';
+import { useEffect, useRef } from 'react';
+import Link from 'next/link';
 
-export const AuthNavbar = ({ type }: { type?: string }) => {
+export const LoggedOutNavbar = ({ type }: { type?: string }) => {
   return (
     <Box
-      className={styles.auth_navbar}
+      className={styles.logged_out_navbar}
       w={'full'}
       p={'2rem 1rem'}
       bg="#ffffff"
       borderBottom=".1rem solid #DEE2E6"
     >
       <Flex
-        w={{ base: '90%', md: '75%' }}
+        // w={{ base: '90%', md: '75%' }}
         m="0rem auto"
         align={'center'}
         justify={'space-between'}
+        maxWidth={'148.4rem'}
+        width={'100%'}
+        margin="0rem auto"
       >
         <Flex align={'center'} gap={'3rem'}>
+          {/* <Link */}
           <ShipamLogoDefault />
           {type && (
             <Box
@@ -35,20 +42,11 @@ export const AuthNavbar = ({ type }: { type?: string }) => {
           )}
         </Flex>
         <Flex gap={'2rem'} className={styles.login_buttons}>
-          <Link
-            as={Button}
-            href="/auth/login"
-            bg={'#ffffff'}
-            color="var(--shipam-primary-red)"
-            className={styles.button}
-          >
+          <Link href={'/auth/login'} className={styles.button}>
             Sign In
           </Link>
           <Link
-            as={Button}
-            href="/auth/signup"
-            bg={'var(--shipam-primary-red)'}
-            color="#ffffff"
+            href={type ? `/auth/register` : '/auth/join-shipam'}
             className={styles.button}
           >
             Join Shipam

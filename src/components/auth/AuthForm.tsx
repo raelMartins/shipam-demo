@@ -14,17 +14,18 @@ import {
   Text,
   VStack
 } from '@chakra-ui/react';
-import axios from 'axios';
 import { FormErrorWrapper } from 'components/forms/FormErrorWrapper';
 import { Checkbox } from 'components/widgets/widgets';
 import { Form, useFormik } from 'formik';
+import Link from 'next/link';
 import { useEffect } from 'react';
+import { login, register } from 'utils/api_calls/auth_api_calls';
 import { segoe } from 'utils/helpers/fonts';
+import { catch_async_error } from 'utils/helpers/helper_functions';
 import * as Yup from 'yup';
 
 export const AuthForm = ({ type = 'sign_in' }) => {
   const validateForm = (values: any) => {
-    console.log(values);
     const errors = {};
     // if (files?.length <= 0 || !files) errors.photos = 'You must upload a photo for this listing';
     // if (values.status !== 'Post Construction' && !startYear) errors.start_year = 'Enter year';
@@ -56,43 +57,42 @@ export const AuthForm = ({ type = 'sign_in' }) => {
         : Yup.string().required('Please confirm your password')
   });
 
-  const signup = async (values: any) => {
-    try {
-      let res = await axios({
-        method: 'POST',
-        url: `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
-        // data: { email: values.email, password: values.password },
-        data: {
-          user_type: 'buyer',
-          firstname: values.firstname,
-          lastname: values.lastname,
-          phone_number: values.phone_number,
-          email: values.email,
-          password: values.password,
-          password_confirmation: values.password_confirmation,
-          agree_terms: 1
-        }
+  const create_account = catch_async_error(
+    async (e: any, values: any) => {
+      const res = await register({
+        user_type: 'buyer',
+        firstname: values.firstname,
+        lastname: values.lastname,
+        phone_number: values.phone_number,
+        email: values.email,
+        password: values.password,
+        password_confirmation: values.password_confirmation,
+        agree_terms: 1
       });
       console.log(res);
-    } catch (err: any) {
-      console.log(err);
-      console.log(err.response);
+    },
+    {
+      successMessage: {
+        description: 'Your account has been created succesfully'
+      }
     }
-  };
+  );
 
-  const login = async (values: any) => {
-    try {
-      let res = await axios({
-        method: 'POST',
-        url: `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`,
-        data: { email: values.email, password: values.password }
+  const login_to_account = catch_async_error(
+    async (e: any, values: any) => {
+      let res = await login({
+        email: values.email,
+        password: values.password
       });
       console.log(res);
-    } catch (err: any) {
-      console.log(err);
-      console.log(err.response);
+    },
+    {
+      successMessage: {
+        description: 'Logged in succesfully'
+      }
     }
-  };
+  );
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -102,10 +102,12 @@ export const AuthForm = ({ type = 'sign_in' }) => {
       password: '',
       password_confirmation: ''
     },
-    // onSubmit: (values) => {
-    //   type === 'sign_up' ? signup : login;
-    // },
-    onSubmit: type === 'sign_up' ? signup : login,
+    onSubmit: (values) => {
+      type === 'sign_up'
+        ? create_account(null, values)
+        : login_to_account(null, values);
+    },
+    // onSubmit: type === 'sign_up' ? create_account : login_to_account,
     validationSchema: formSchema,
     validateOnChange: false,
     validateOnBlur: false,
@@ -341,8 +343,24 @@ export const AuthForm = ({ type = 'sign_in' }) => {
               mt="-1rem"
               mb="2rem"
             >
-              Already have an account?{' '}
-              <Text color={'var(--shipam-primary-red)'}>Sign in</Text>
+              {type === 'sign_up' ? (
+                <>
+                  Already have an account?{' '}
+                  <Link href="/auth/login" color={'var(--shipam-primary-red)'}>
+                    Sign in
+                  </Link>
+                </>
+              ) : (
+                <>
+                  Don&apos;t have an account?{' '}
+                  <Link
+                    href="/auth/join-shipam"
+                    color={'var(--shipam-primary-red)'}
+                  >
+                    Crete an account
+                  </Link>
+                </>
+              )}
             </Flex>
           </Grid>
         </Box>

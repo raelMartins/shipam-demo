@@ -1,15 +1,13 @@
 import { Flex } from '@chakra-ui/react';
 import styles from './page.module.scss';
-import { AuthNavbar } from 'layouts/navbars/AuthNavbar';
 import { BasicFooter } from 'layouts/footers/BasicFooter';
-import { redirect } from 'next/navigation';
+import { Navbar } from 'layouts/navbars/Navbar';
 
 export default function Home() {
-  redirect('/shop');
   return (
     <main className={styles.main}>
       <Flex minH={'100vh'} direction="column">
-        <AuthNavbar />
+        <Navbar />
         <Flex
           direction={'column'}
           flex={'1'}

@@ -1,16 +1,8 @@
-// { params }: { params: { subdomain: string } }
-import {
-  Box,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  Flex
-} from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import { BasicFooter } from 'layouts/footers/BasicFooter';
 import { PrimaryFooter } from 'layouts/footers/PrimaryFooter';
 import { SubscribeToNewsletter } from 'layouts/footers/SubscribeToNewsletter';
-import { AuthNavbar } from 'layouts/navbars/AuthNavbar';
-import { LoggedInNavbar } from 'layouts/navbars/LoggedInNavbar';
+import { Navbar } from 'layouts/navbars/Navbar';
 import { Navigation } from 'layouts/navbars/Navigation';
 
 export default function ShopLayout({
@@ -22,7 +14,7 @@ export default function ShopLayout({
 }) {
   return (
     <Flex minH={'100vh'} direction="column">
-      <LoggedInNavbar type={params.subdomain} />
+      <Navbar user_type={params.subdomain} />
       <Flex
         direction={'column'}
         flex={'1'}

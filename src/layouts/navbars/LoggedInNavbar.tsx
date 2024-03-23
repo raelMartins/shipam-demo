@@ -2,7 +2,13 @@ import { Badge, Box, Button, Flex, Link } from '@chakra-ui/react';
 import { ShipamLogoDefault } from 'components/design_icons';
 import styles from './loggedinnavbar.module.scss';
 
-export const LoggedInNavbar = ({ type }: { type?: string }) => {
+export const LoggedInNavbar = ({
+  type,
+  profile
+}: {
+  type?: string;
+  profile?: any;
+}) => {
   return (
     <Box
       className={styles.logged_in_navbar}

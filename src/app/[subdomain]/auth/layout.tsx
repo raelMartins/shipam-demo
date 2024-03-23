@@ -1,6 +1,6 @@
 import { Box, Flex } from '@chakra-ui/react';
 import { BasicFooter } from 'layouts/footers/BasicFooter';
-import { AuthNavbar } from 'layouts/navbars/AuthNavbar';
+import { Navbar } from 'layouts/navbars/Navbar';
 
 export default function AuthLayout({
   children // will be a page or nested layout
@@ -9,7 +9,7 @@ export default function AuthLayout({
 }) {
   return (
     <Flex minH={'100vh'} direction="column">
-      <AuthNavbar type="buyer" />
+      <Navbar user_type="buyer" />
       <Flex
         direction={'column'}
         flex={'1'}

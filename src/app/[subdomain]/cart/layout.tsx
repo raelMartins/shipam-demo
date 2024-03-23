@@ -1,16 +1,10 @@
-import {
-  Box,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  Flex
-} from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import { BasicFooter } from 'layouts/footers/BasicFooter';
 import { PrimaryFooter } from 'layouts/footers/PrimaryFooter';
 import { SubscribeToNewsletter } from 'layouts/footers/SubscribeToNewsletter';
-import { AuthNavbar } from 'layouts/navbars/AuthNavbar';
 import { LoggedInNavbar } from 'layouts/navbars/LoggedInNavbar';
 import { Navigation } from 'layouts/navbars/Navigation';
+import { Navbar } from 'layouts/navbars/Navbar';
 
 export default function ShopLayout({
   children // will be a page or nested layout
@@ -19,7 +13,7 @@ export default function ShopLayout({
 }) {
   return (
     <Flex minH={'100vh'} direction="column">
-      <LoggedInNavbar type="buyer" />
+      <Navbar user_type="buyer" />
       <Flex
         direction={'column'}
         flex={'1'}
