@@ -5,7 +5,7 @@ import { SubscribeToNewsletter } from 'layouts/footers/SubscribeToNewsletter';
 import { Navbar } from 'layouts/navbars/Navbar';
 import { Navigation } from 'layouts/navbars/Navigation';
 
-export default function ShopLayout({
+export default function GeneralLayout({
   children, // will be a page or nested layout
   params
 }: {
@@ -14,7 +14,8 @@ export default function ShopLayout({
 }) {
   return (
     <Flex minH={'100vh'} direction="column">
-      <Navbar user_type={params.subdomain} />
+      {children}
+      {/* <Navbar user_type={params.subdomain} />
       <Flex
         direction={'column'}
         flex={'1'}
@@ -29,7 +30,7 @@ export default function ShopLayout({
       </Flex>
       <SubscribeToNewsletter />
       <PrimaryFooter />
-      <BasicFooter />
+      <BasicFooter /> */}
     </Flex>
   );
 }

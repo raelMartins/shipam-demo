@@ -18,15 +18,27 @@ import { FormErrorWrapper } from 'components/forms/FormErrorWrapper';
 import { Checkbox } from 'components/widgets/widgets';
 import { Form, useFormik } from 'formik';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { login, register } from 'utils/api_calls/auth_api_calls';
 import { segoe } from 'utils/helpers/fonts';
 import { catch_async_error } from 'utils/helpers/helper_functions';
 import * as Yup from 'yup';
 
-export const AuthForm = ({ type = 'sign_in' }) => {
+export const AuthForm = ({
+  auth_type = 'sign_in',
+  user_type
+}: {
+  auth_type: string;
+  user_type: string;
+}) => {
+  const [accepted_terms, set_accepted_terms] = useState(false);
   const validateForm = (values: any) => {
-    const errors = {};
+    const errors: any = {};
+    if (auth_type === 'sign_up' && !accepted_terms) {
+      toast.error('Accept terms before proceeding');
+      return;
+    }
     // if (files?.length <= 0 || !files) errors.photos = 'You must upload a photo for this listing';
     // if (values.status !== 'Post Construction' && !startYear) errors.start_year = 'Enter year';
 
@@ -39,20 +51,20 @@ export const AuthForm = ({ type = 'sign_in' }) => {
   const formSchema = Yup.object().shape({
     email: Yup.string().required('Please enter your email'),
     firstname:
-      type !== 'sign_up'
+      auth_type !== 'sign_up'
         ? Yup.string()
         : Yup.string().required('Please enter your first name'),
     lastname:
-      type !== 'sign_up'
+      auth_type !== 'sign_up'
         ? Yup.string()
         : Yup.string().required('Please enter your last name'),
     phone_number:
-      type !== 'sign_up'
+      auth_type !== 'sign_up'
         ? Yup.string()
         : Yup.string().required('Please enter your phone number'),
     password: Yup.string().required('Please enter your password'),
     password_confirmation:
-      type !== 'sign_up'
+      auth_type !== 'sign_up'
         ? Yup.string()
         : Yup.string().required('Please confirm your password')
   });
@@ -60,7 +72,7 @@ export const AuthForm = ({ type = 'sign_in' }) => {
   const create_account = catch_async_error(
     async (e: any, values: any) => {
       const res = await register({
-        user_type: 'buyer',
+        user_type,
         firstname: values.firstname,
         lastname: values.lastname,
         phone_number: values.phone_number,
@@ -70,6 +82,7 @@ export const AuthForm = ({ type = 'sign_in' }) => {
         agree_terms: 1
       });
       console.log(res);
+      location.assign('/');
     },
     {
       successMessage: {
@@ -85,6 +98,7 @@ export const AuthForm = ({ type = 'sign_in' }) => {
         password: values.password
       });
       console.log(res);
+      location.assign('/');
     },
     {
       successMessage: {
@@ -103,11 +117,11 @@ export const AuthForm = ({ type = 'sign_in' }) => {
       password_confirmation: ''
     },
     onSubmit: (values) => {
-      type === 'sign_up'
+      auth_type === 'sign_up'
         ? create_account(null, values)
         : login_to_account(null, values);
     },
-    // onSubmit: type === 'sign_up' ? create_account : login_to_account,
+    // onSubmit: auth_type === 'sign_up' ? create_account : login_to_account,
     validationSchema: formSchema,
     validateOnChange: false,
     validateOnBlur: false,
@@ -123,12 +137,12 @@ export const AuthForm = ({ type = 'sign_in' }) => {
       box-shadow="0px 2.4000000953674316px 8px 0px #0000001A"
     >
       <CardHeader textTransform={'capitalize'} fontWeight={'600'}>
-        {type.split('_').join(' ')}
+        {auth_type.split('_').join(' ')}
       </CardHeader>
       <CardBody>
         <Box as="form" onSubmit={formik.handleSubmit}>
           <Grid gap={'2rem'}>
-            {type === 'sign_in' ? (
+            {auth_type === 'sign_in' ? (
               <>
                 <VStack alignItems={'flex-start'} spacing={'0rem'}>
                   <FormLabel
@@ -314,8 +328,14 @@ export const AuthForm = ({ type = 'sign_in' }) => {
                     border=".1rem solid #DEE2E6"
                   />
                 </VStack>
-                <Flex align="center" gap="1rem">
-                  <Checkbox /> I agree to the terms of service
+                <Flex
+                  align="center"
+                  gap="1rem"
+                  onClick={() => set_accepted_terms(!accepted_terms)}
+                  cursor={'pointer'}
+                >
+                  <Checkbox is_active={accepted_terms} /> I agree to the terms
+                  of service
                 </Flex>
               </>
             )}
@@ -331,9 +351,10 @@ export const AuthForm = ({ type = 'sign_in' }) => {
               _hover={{ backgroundColor: 'var(--shipam-primary-red)' }}
               _active={{ backgroundColor: 'var(--shipam-primary-red)' }}
               _focus={{ backgroundColor: 'var(--shipam-primary-red)' }}
-              onClick={() => formik.handleSubmit()}
+              onClick={(e) => formik.handleSubmit()}
+              isDisabled={auth_type === 'sign_up' && !accepted_terms}
             >
-              {type.split('_').join(' ')}
+              {auth_type.split('_').join(' ')}
             </Button>
             <Divider />
             <Flex
@@ -343,10 +364,13 @@ export const AuthForm = ({ type = 'sign_in' }) => {
               mt="-1rem"
               mb="2rem"
             >
-              {type === 'sign_up' ? (
+              {auth_type === 'sign_up' ? (
                 <>
                   Already have an account?{' '}
-                  <Link href="/auth/login" color={'var(--shipam-primary-red)'}>
+                  <Link
+                    href="/auth/login"
+                    style={{ color: 'var(--shipam-primary-red)' }}
+                  >
                     Sign in
                   </Link>
                 </>
@@ -355,9 +379,9 @@ export const AuthForm = ({ type = 'sign_in' }) => {
                   Don&apos;t have an account?{' '}
                   <Link
                     href="/auth/join-shipam"
-                    color={'var(--shipam-primary-red)'}
+                    style={{ color: 'var(--shipam-primary-red)' }}
                   >
-                    Crete an account
+                    Create an account
                   </Link>
                 </>
               )}

@@ -41,17 +41,14 @@ export const Checkbox = ({ is_active = false, onClick = (e?: any) => {} }) => {
     border: `0.2rem solid var(--shipam-primary-red)`
   };
 
-  const [active, setIsActive] = useState(is_active);
-
   const handle_click = () => {
     onClick();
-    setIsActive(!active);
   };
 
   return (
     <span
       className={styles.checkbox}
-      style={active ? activeCheckbox : {}}
+      style={is_active ? activeCheckbox : {}}
       onClick={handle_click}
     >
       <IoIosCheckmark fontSize={'3rem'} />

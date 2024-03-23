@@ -5,7 +5,7 @@ import { SubscribeToNewsletter } from 'layouts/footers/SubscribeToNewsletter';
 import { Navbar } from 'layouts/navbars/Navbar';
 import { Navigation } from 'layouts/navbars/Navigation';
 
-export default function AuthLayout({
+export default function ShopLayout({
   children, // will be a page or nested layout
   params
 }: {
@@ -22,9 +22,13 @@ export default function AuthLayout({
         padding={{ base: '2rem 1rem' }}
       >
         <Box maxWidth={'148.4rem'} width={'100%'} margin="0rem auto">
+          <Navigation />
+
           {children}
         </Box>
       </Flex>
+      <SubscribeToNewsletter />
+      <PrimaryFooter />
       <BasicFooter />
     </Flex>
   );
