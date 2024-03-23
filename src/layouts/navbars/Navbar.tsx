@@ -7,7 +7,7 @@ import { catch_async_error } from 'utils/helpers/helper_functions';
 
 export const Navbar = ({
   user_type = '',
-  profile
+  profile = { user_name: 'martins' }
 }: {
   user_type?: string;
   profile?: any;

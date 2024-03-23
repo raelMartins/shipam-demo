@@ -7,7 +7,7 @@ import { Navigation } from 'layouts/navbars/Navigation';
 import { Navbar } from 'layouts/navbars/Navbar';
 import { SidebarNav } from 'layouts/sidebars/SidebarNav';
 
-export default function ShopLayout({
+export default function FAQLayout({
   children // will be a page or nested layout
 }: {
   children: React.ReactNode;

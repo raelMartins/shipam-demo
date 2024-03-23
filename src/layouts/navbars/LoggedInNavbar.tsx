@@ -1,10 +1,27 @@
-import { Badge, Box, Button, Flex, Link } from '@chakra-ui/react';
+import {
+  Badge,
+  Box,
+  Center,
+  Flex,
+  HStack,
+  Input,
+  InputGroup,
+  Link,
+  Select,
+  Text,
+  VStack
+} from '@chakra-ui/react';
 import { ShipamLogoDefault } from 'components/design_icons';
 import styles from './loggedinnavbar.module.scss';
+import { FaUser } from 'react-icons/fa';
+import { Button } from 'ui-lib';
+import { BsChatLeftTextFill } from 'react-icons/bs';
+import { AiFillHeart } from 'react-icons/ai';
+import { ImCart } from 'react-icons/im';
 
 export const LoggedInNavbar = ({
   type,
-  profile
+  profile = { name: 'Martins Akeredolu' }
 }: {
   type?: string;
   profile?: any;
@@ -25,6 +42,7 @@ export const LoggedInNavbar = ({
         maxWidth={'148.4rem'}
         width={'100%'}
         margin="0rem auto"
+        gap={'2rem'}
       >
         <Flex align={'center'} gap={'3rem'}>
           <ShipamLogoDefault />
@@ -43,26 +61,86 @@ export const LoggedInNavbar = ({
             </Box>
           )}
         </Flex>
-        <Flex gap={'2rem'} className={styles.login_buttons}>
-          <Link
-            as={Button}
-            href="/auth/login"
-            bg={'#ffffff'}
-            color="var(--shipam-primary-red)"
-            className={styles.button}
+        <InputGroup
+          maxW={'67rem'}
+          border=".16rem solid var(--shipam-primary-red)"
+          display={'flex'}
+          alignItems="center"
+          fontSize="1.6rem"
+          borderRadius={'6rem'}
+        >
+          <Input
+            type="text"
+            flex="1"
+            fontSize="1.6rem"
+            p="2rem"
+            borderRadius={'none'}
+            border={'none'}
+            borderRight={'.16rem solid var(--shipam-primary-red)'}
+            _focus={{ outline: 'none' }}
+            _focusVisible={{ outline: 'none' }}
+          />
+          <Select
+            placeholder="Select category"
+            w="15rem"
+            h="max-content"
+            fontSize="1.6rem"
+            borderRadius={'none'}
+            outline={'none'}
+            border={'none'}
+            _focus={{ outline: 'none' }}
+            _focusVisible={{ outline: 'none' }}
           >
-            Sign In
-          </Link>
-          <Link
-            as={Button}
-            href="/auth/signup"
-            bg={'var(--shipam-primary-red)'}
-            color="#ffffff"
-            className={styles.button}
+            <option value="all">All Categories</option>
+            <option value="category_1">Category 1</option>
+            <option value="category_2">Category 2</option>
+            <option value="category_#">Category 3</option>
+          </Select>
+          {/* <Button bg="var(--shipam-primary-red)" color="white">
+            Search
+          </Button> */}
+          <Button
+            p="2rem"
+            fontSize="1.6rem"
+            borderRadius={'0rem 6rem 6rem 0rem'}
           >
-            Join Shipam
+            Search
+          </Button>
+        </InputGroup>
+        <HStack gap="2rem" color="#8B96A5">
+          <Link _hover={{ textDecoration: 'none' }} href="/account">
+            <VStack gap={'.7rem'}>
+              <FaUser fontSize={'2rem'} />
+              <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
+                Profile
+              </Text>
+            </VStack>
           </Link>
-        </Flex>
+          <Link _hover={{ textDecoration: 'none' }} href="/inbox">
+            <VStack gap={'.7rem'}>
+              <BsChatLeftTextFill fontSize={'2rem'} />
+              <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
+                Message
+              </Text>
+            </VStack>
+          </Link>
+          <Link _hover={{ textDecoration: 'none' }} href="/orders">
+            <VStack gap={'.7rem'}>
+              <AiFillHeart fontSize={'2rem'} />
+              <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
+                Orders
+              </Text>
+            </VStack>
+          </Link>
+          <Link _hover={{ textDecoration: 'none' }} href="/cart">
+            <VStack gap={'.7rem'}>
+              <ImCart fontSize={'2rem'} />
+              <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
+                My Cart
+              </Text>
+            </VStack>
+          </Link>
+        </HStack>
       </Flex>
     </Box>
   );
