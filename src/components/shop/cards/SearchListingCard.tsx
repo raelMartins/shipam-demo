@@ -17,18 +17,22 @@ import Image from 'next/image';
 import { AddToWishlistButton } from './AddToWishlistButton';
 
 export const SearchListingCard = ({
-  product_details = {
-    rating: 7.5,
-    best_possible_rating: 10,
-    image_url: `/images/placeholders/product/product_image_${Math.ceil(
-      Math.random() * 6
-    )}.svg`,
-    price: 998,
-    old_price: 1250,
-    free_shipping: true,
-    order_count: 154
-  }
+  data,
+  category
+}: {
+  data: any;
+  category?: string;
 }) => {
+  const product_details = {
+    rating: 0,
+    best_possible_rating: 10,
+    price: 0,
+    old_price: 0,
+    free_shipping: true,
+    stock_size: 1,
+    ...data
+  };
+
   return (
     <Card
       bg="#fff"
@@ -61,7 +65,11 @@ export const SearchListingCard = ({
       </Box>
       <Center w="28rem" h="21rem" position={'relative'}>
         <Image
-          src={product_details.image_url}
+          // src={product_details?.image_url}
+          src={
+            product_details?.images?.find((el: any) => el.is_featured == '1')
+              ?.image || `/images/placeholders/product/no_product.jpeg`
+          }
           alt="Product Image"
           fill
           objectFit="contain"
@@ -76,7 +84,7 @@ export const SearchListingCard = ({
             lineHeight={'2.2rem'}
             mb="2rem"
           >
-            GoPro HERO6 4K Action Camera - Black
+            {product_details?.name || 'Unknown Product'}
           </Heading>
           <Text
             color={'#1C1C1C'}
@@ -88,26 +96,26 @@ export const SearchListingCard = ({
             {Intl.NumberFormat('en-US', {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2
-            }).format(product_details.price || 0)}
+            }).format(product_details?.price || 0)}
           </Text>
           <Flex align={'center'} gap={'1rem'}>
             <StarRatings
               rating={
-                (product_details.rating /
-                  product_details.best_possible_rating) *
+                (product_details?.rating /
+                  product_details?.best_possible_rating) *
                 5
               }
             />
-            <Text color={'#FF9017'}>{product_details.rating}</Text>
+            <Text color={'#FF9017'}>{product_details?.rating}</Text>
           </Flex>
 
-          <Text py="2" lineHeight={'2.4rem'}>
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit
-          </Text>
+          {product_details?.description && (
+            <Text py="2" lineHeight={'2.4rem'} noOfLines={3}>
+              {product_details?.description}
+            </Text>
+          )}
           <Link
-            href={'/shop/test-shop'}
+            href={`/shop/${category}/${product_details?.slug}`}
             color="var(--shipam-primary-red)"
             lineHeight={'2rem'}
             fontWeight={'500'}

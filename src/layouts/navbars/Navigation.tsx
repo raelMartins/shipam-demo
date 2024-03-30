@@ -1,6 +1,12 @@
 'use client';
 
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  Link as ChakraLink
+} from '@chakra-ui/react';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -16,19 +22,22 @@ export const Navigation = () => {
       .split('/')
       .filter((el) => el !== '');
     setPaths(res);
-  }, []);
+  }, [pathname]);
 
   return (
     <Breadcrumb separator=">" color={'#8B96A5'} my={'20px'}>
       <BreadcrumbItem>
-        <BreadcrumbLink href="/">Home</BreadcrumbLink>
+        <ChakraLink as={Link} href="/" _hover={{ textDecor: 'underline' }}>
+          Home
+        </ChakraLink>
       </BreadcrumbItem>
       {paths.map((path: string, index: number) => (
         <BreadcrumbItem key={index}>
-          <BreadcrumbLink
+          <ChakraLink
+            as={Link}
             href={`/${paths.slice(0, index + 1).join('/')}`}
             textTransform={'capitalize'}
-            isCurrentPage={paths.length - 1 === index}
+            _hover={{ textDecor: 'underline' }}
           >
             {path
               .split('-')
@@ -37,7 +46,7 @@ export const Navigation = () => {
               .join(' ')
               .split('%20')
               .join(' ')}
-          </BreadcrumbLink>
+          </ChakraLink>
         </BreadcrumbItem>
       ))}
     </Breadcrumb>

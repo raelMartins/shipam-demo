@@ -5,11 +5,21 @@ import { ProductOverview } from 'components/shop/product/ProductOverview';
 import { ProductTabs } from 'components/shop/product/ProductTabs';
 import { RelatedProducts } from 'components/shop/promotions/RelatedProducts';
 import { YouMayLikeSidebar } from 'components/shop/promotions/YouMayLikeSideBar';
+import { get_product_by_slug } from 'utils/api_calls/product_api_calls';
 
-export default function ShipamProductPage({}) {
+export default async function ShipamProductPage({
+  params,
+  searchParams
+}: {
+  params: { product_slug: string };
+  searchParams: any;
+}) {
+  const product = await get_product_by_slug({
+    product_slug: params.product_slug
+  });
   return (
     <Flex direction={'column'} gap={'2rem'}>
-      <ProductOverview />
+      <ProductOverview product={product} />
       <Flex gap="2rem">
         <Box
           flex="1"
@@ -19,7 +29,7 @@ export default function ShipamProductPage({}) {
           border=".1rem solid #DEE2E7"
           box-shadow="0px 1px 3px 0px #3838381A"
         >
-          <ProductTabs />
+          <ProductTabs product={product} />
         </Box>
         <YouMayLikeSidebar />
       </Flex>

@@ -1,4 +1,5 @@
 // middleware.ts
+import { getCookie } from 'cookies-next';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getValidSubdomain } from 'utils/helpers/subdomain';
@@ -7,6 +8,9 @@ import { getValidSubdomain } from 'utils/helpers/subdomain';
 const PUBLIC_FILE = /\.(.*)$/; // Files
 
 export async function middleware(req: NextRequest) {
+  const token = getCookie('shipam_token');
+  //first fetch profile
+
   // Clone the URL
   const url = req.nextUrl.clone();
 

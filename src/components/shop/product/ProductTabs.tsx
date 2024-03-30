@@ -1,7 +1,6 @@
 'use client';
 
 import {
-  Box,
   Grid,
   Heading,
   Input,
@@ -14,14 +13,15 @@ import {
   TabPanels,
   Tabs,
   Text,
-  UnorderedList,
   VStack
 } from '@chakra-ui/react';
 import { MdCheck } from 'react-icons/md';
 import { SummerSaleDIscount } from '../promotions/SummerSaleDIscount';
 import { Button } from 'ui-lib';
 
-export const ProductTabs = () => {
+export const ProductTabs = ({ product }: { product: any }) => {
+  const specs = JSON.parse(product?.specifications);
+  const specs_array = Object.entries(specs);
   return (
     <Tabs isFitted>
       <TabList color="#8B96A5" lineHeight={'1.9rem'}>
@@ -74,7 +74,8 @@ export const ProductTabs = () => {
       <TabPanels padding={'2rem'} color="#505050">
         <TabPanel>
           <Text>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            {product?.description ||
+              `Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
             aliquip ex ea commodo consequat. Duis aute irure dolor in
@@ -84,39 +85,19 @@ export const ProductTabs = () => {
             Ut enim ad minim veniam, Quis nostrud exercitation ullamco laboris
             nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
             reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur.{' '}
+            pariatur.`}
           </Text>
           <Grid templateColumns={'1fr 2fr'} w="76rem" mt="4.8rem">
-            <Text p=".6rem 1rem" border=".1rem solid #E0E7E9" bg="#EFF2F4">
-              Model
-            </Text>
-            <Text p=".6rem 1rem" border=".1rem solid #E0E7E9">
-              S23 Ultra
-            </Text>
-            <Text p=".6rem 1rem" border=".1rem solid #E0E7E9" bg="#EFF2F4">
-              Version
-            </Text>
-            <Text p=".6rem 1rem" border=".1rem solid #E0E7E9">
-              US
-            </Text>
-            <Text p=".6rem 1rem" border=".1rem solid #E0E7E9" bg="#EFF2F4">
-              Appearance
-            </Text>
-            <Text p=".6rem 1rem" border=".1rem solid #E0E7E9">
-              No scratch
-            </Text>
-            <Text p=".6rem 1rem" border=".1rem solid #E0E7E9" bg="#EFF2F4">
-              Screen
-            </Text>
-            <Text p=".6rem 1rem" border=".1rem solid #E0E7E9">
-              6.8
-            </Text>
-            <Text p=".6rem 1rem" border=".1rem solid #E0E7E9" bg="#EFF2F4">
-              RAM
-            </Text>
-            <Text p=".6rem 1rem" border=".1rem solid #E0E7E9">
-              8GB RAM
-            </Text>
+            {specs_array.map((el: any[]) => (
+              <>
+                <Text p=".6rem 1rem" border=".1rem solid #E0E7E9" bg="#EFF2F4">
+                  {el[0] || 'Feature'}
+                </Text>
+                <Text p=".6rem 1rem" border=".1rem solid #E0E7E9">
+                  {el[1]}
+                </Text>
+              </>
+            ))}
           </Grid>
           <List my="2.6rem" spacing={'1rem'}>
             <ListItem>

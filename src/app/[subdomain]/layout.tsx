@@ -1,4 +1,5 @@
 import { Box, Flex } from '@chakra-ui/react';
+import { getCookie } from 'cookies-next';
 import { BasicFooter } from 'layouts/footers/BasicFooter';
 import { PrimaryFooter } from 'layouts/footers/PrimaryFooter';
 import { SubscribeToNewsletter } from 'layouts/footers/SubscribeToNewsletter';

@@ -20,8 +20,9 @@ import {
 } from '@chakra-ui/react';
 import { Checkbox, RadioButton, StarRatings } from 'components/widgets/widgets';
 import Link from 'next/link';
+import { CategoryFilter } from './filters/CategoryFIlter';
 
-export const SidebarFilters = ({}) => {
+export const SidebarFilters = ({ categories }: { categories: any[] }) => {
   return (
     <Accordion
       defaultIndex={[0, 1, 2, 3, 4, 5, 6, 7]}
@@ -30,36 +31,7 @@ export const SidebarFilters = ({}) => {
       fontSize={'1.6rem'}
       lineHeight={'2rem'}
     >
-      <AccordionItem border={'none'} borderBottom={'.1rem solid #DEE2E7'}>
-        <AccordionButton
-          p={'2rem 0rem'}
-          _hover={{ background: 'inherit' }}
-          color="#1C1C1C"
-        >
-          <Box
-            as="span"
-            flex="1"
-            textAlign="left"
-            fontSize={'1.6rem'}
-            lineHeight={'2rem'}
-            fontWeight={'600'}
-          >
-            Category
-          </Box>
-          <AccordionIcon fontSize={'2rem'} />
-        </AccordionButton>
-        <AccordionPanel px={'0px'} color={'#505050'}>
-          <Flex direction={'column'} height={'100%'} gap={'1rem'}>
-            <Text>Mobile accessory</Text>
-            <Text>Electronics</Text>
-            <Text>Smartphones</Text>
-            <Text>Modern Tech</Text>
-            <Text color="var(--shipam-primary-red)" cursor={'pointer'}>
-              See all
-            </Text>
-          </Flex>
-        </AccordionPanel>
-      </AccordionItem>
+      <CategoryFilter categories={categories} />
       <AccordionItem border={'none'} borderBottom={'.1rem solid #DEE2E7'}>
         <AccordionButton
           p={'2rem 0rem'}

@@ -83,6 +83,7 @@ export const AuthForm = ({
       });
       console.log(res);
       location.assign('/');
+      localStorage.setItem('shipam_profile', 'Logged In');
     },
     {
       successMessage: {
@@ -99,6 +100,7 @@ export const AuthForm = ({
       });
       console.log(res);
       location.assign('/');
+      localStorage.setItem('shipam_profile', 'Logged In');
     },
     {
       successMessage: {

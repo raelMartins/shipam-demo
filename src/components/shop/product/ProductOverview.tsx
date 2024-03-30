@@ -24,7 +24,7 @@ import { StarRatings } from 'components/widgets/widgets';
 import Image from 'next/image';
 import { SupplierCard } from '../cards/SupplierCard';
 
-export const ProductOverview = () => {
+export const ProductOverview = ({ product }: { product: any }) => {
   return (
     <Flex
       p="2rem 2.8rem 4.4rem"
@@ -43,39 +43,38 @@ export const ProductOverview = () => {
           p="1rem"
         >
           <Image
-            src={`/images/placeholders/product/product_image_${Math.ceil(
-              Math.random() * 6
-            )}.svg`}
+            src={
+              product?.images?.find((el: any) => el.is_featured == '1')
+                ?.image || `/images/placeholders/product/no_product.jpeg`
+            }
             alt="Product Image"
             fill
             objectFit="contain"
           />
         </Center>
         <Grid w="100%" templateColumns={'repeat(6, 1fr)'} gap={'1rem'}>
-          {Array(6)
-            .fill('')
-            .map((el, i) => (
-              <Center
-                w="7rem"
-                h="5.6rem"
-                position={'relative'}
-                borderRadius={'.1rem'}
-                border=".1rem solid #e0e0e0"
-                p="1rem"
-                key={i}
-                _hover={{ border: '.2rem solid #e0e0e0' }}
-                cursor={'pointer'}
-              >
-                <Image
-                  src={`/images/placeholders/product/product_image_${Math.ceil(
-                    Math.random() * 6
-                  )}.svg`}
-                  alt="Product Image"
-                  fill
-                  objectFit="contain"
-                />
-              </Center>
-            ))}
+          {product?.images?.map((el: any, i: number) => (
+            <Center
+              w="7rem"
+              h="5.6rem"
+              position={'relative'}
+              borderRadius={'.1rem'}
+              border=".1rem solid #e0e0e0"
+              p="1rem"
+              key={i}
+              _hover={{ border: '.2rem solid #e0e0e0' }}
+              cursor={'pointer'}
+            >
+              <Image
+                src={
+                  el?.image || `/images/placeholders/product/no_product.jpeg`
+                }
+                alt="Product Image"
+                fill
+                objectFit="contain"
+              />
+            </Center>
+          ))}
         </Grid>
       </VStack>
       <VStack alignItems={'flex-start'}>
@@ -94,11 +93,11 @@ export const ProductOverview = () => {
           </Badge>
         </Flex>
         <Heading fontSize={'2rem'} lineHeight={'2.8rem'} my="1rem">
-          Green Apple
+          {product?.name || 'Unknown Product'}
         </Heading>
         <Flex align={'center'} gap={'1rem'}>
-          <StarRatings rating={4} />
-          <Text color={'#FF9017'}>8.7</Text>
+          <StarRatings rating={product?.rating || 0} />
+          <Text color={'#FF9017'}>{product?.rating || 0}</Text>
         </Flex>
         <Grid
           bg="#FFF0DF"
@@ -118,7 +117,7 @@ export const ProductOverview = () => {
               fontWeight={'600'}
               color="var(--shipam-primary-red)"
             >
-              $118.00
+              ${product?.price || 118.0}
             </Text>
             <Text fontSize={'1.3rem'} color="#606060" minW={'max-content'}>
               1 pc
@@ -130,7 +129,7 @@ export const ProductOverview = () => {
             borderRight={'.1rem solid #BDC1C8'}
           >
             <Text fontSize={'1.8rem'} lineHeight={'2.2rem'} fontWeight={'600'}>
-              $98.00
+              ${product?.price || 98.0}
             </Text>
             <Text fontSize={'1.3rem'} color="#606060" minW={'max-content'}>
               50 - 100 pcs
@@ -142,7 +141,7 @@ export const ProductOverview = () => {
             borderRight={'.1rem solid #BDC1C8'}
           >
             <Text fontSize={'1.8rem'} lineHeight={'2.2rem'} fontWeight={'600'}>
-              $90.00
+              ${product?.price || 90.0}
             </Text>
             <Text fontSize={'1.3rem'} color="#606060" minW={'max-content'}>
               100 - 700 pcs
@@ -150,7 +149,7 @@ export const ProductOverview = () => {
           </VStack>
           <VStack alignItems="flex-start" px="2rem">
             <Text fontSize={'1.8rem'} lineHeight={'2.2rem'} fontWeight={'600'}>
-              $78.00
+              ${product?.price || 78.0}
             </Text>
             <Text fontSize={'1.3rem'} color="#606060" minW={'max-content'}>
               700+ pcs
@@ -162,7 +161,7 @@ export const ProductOverview = () => {
             Price:
           </Text>
           <Text flex={'2'} color="#505050">
-            Negotiable
+            ${product?.price || 'Negotiable'}
           </Text>
           <Text flex={'1'} color="#8B96A5">
             Price/Carton:
@@ -173,7 +172,7 @@ export const ProductOverview = () => {
             fontWeight={'600'}
             textAlign={'right'}
           >
-            $90.00
+            ${product?.price || '90.00'}
           </Text>
         </HStack>
         <Divider border={'.1rem solid #E0E0E0'} />
