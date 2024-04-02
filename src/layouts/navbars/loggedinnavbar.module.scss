@@ -1,32 +1,28 @@
 .logged_in_navbar {
   .login_buttons {
     .button {
-      border-radius: 0.64rem;
-      // color: var(--shipam-primary-red);
-      border: 0.1rem solid var(--shipam-primary-red);
       font-size: 1.6rem;
-      line-height: 2.2rem;
       font-weight: 400;
-      padding: 2rem;
-      opacity: 0.9;
+      opacity: 0.95;
       font-family: var(--font_segoe);
-      text-decoration: none;
+      padding: 1.2rem 2.4rem;
+      border-radius: 0.64rem;
+      border: 0.16rem solid;
+      line-height: 100%;
+      transition: 0.3s;
+      &:hover,
+      &:active,
+      &:focus {
+        opacity: 1;
+        text-decoration: none;
+      }
     }
     .button:nth-child(1) {
-      &:hover,
-      &:active,
-      &:focus {
-        background-color: white;
-        opacity: 1;
-      }
+      color: var(--shipam-primary-red);
     }
     .button:nth-child(2) {
-      &:hover,
-      &:active,
-      &:focus {
-        background-color: var(--shipam-primary-red);
-        opacity: 1;
-      }
+      background: var(--shipam-primary-red);
+      color: #ffffff;
     }
   }
 }

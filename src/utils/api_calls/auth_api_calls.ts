@@ -10,9 +10,21 @@ export const login = async (data: { email: string; password: string }) => {
     data
   });
 
-  setCookie('shipam_token', res.data.data.token);
-  setCookie('shipam_user_id', res.data.data.user.id);
-  return res.data.data;
+  // const res = await fetch(`${BASE_URL}/auth/login`, {
+  //   method: 'POST',
+  //   headers:{ 'Content-Type': 'application/json'},
+  //   // body: {...data}
+  //   // headers: { Accept: 'application/json', Cookie: `__Host-GAPS=${token}` },
+  // });
+
+  // const response = await res.json();
+  const response = res.data;
+  console.log(response);
+
+  setCookie('shipam_token', response.data.token);
+  setCookie('shipam_user_id', response.data.user.id);
+  // return res.data.data;
+  return response.data;
 };
 
 export const register = async (data: {

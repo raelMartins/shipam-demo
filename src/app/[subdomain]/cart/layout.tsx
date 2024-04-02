@@ -24,8 +24,8 @@ export default function ShopLayout({
       >
         <Box maxWidth={'148.4rem'} width={'100%'} margin="0rem auto">
           <Navigation />
-          <VStack alignItems={'flex-start'} maxW="119rem">
-            <Flex mb="10rem">
+          <VStack alignItems={'flex-start'} maxW="119rem" w="100%">
+            <Flex mb="10rem" gap="5rem" w="100%">
               <SidebarNav />
               {children}
             </Flex>

@@ -16,6 +16,7 @@ export const SavedForLater = () => {
       bg="#FFFFFF"
       borderRadius={'.4rem'}
       border=".1rem solid #DEE2E7"
+      w="100%"
     >
       <Text
         mb="1.5rem"

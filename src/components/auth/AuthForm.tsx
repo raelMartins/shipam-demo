@@ -27,7 +27,7 @@ import * as Yup from 'yup';
 
 export const AuthForm = ({
   auth_type = 'sign_in',
-  user_type
+  user_type = 'better'
 }: {
   auth_type: string;
   user_type: string;
@@ -83,7 +83,6 @@ export const AuthForm = ({
       });
       console.log(res);
       location.assign('/');
-      localStorage.setItem('shipam_profile', 'Logged In');
     },
     {
       successMessage: {
@@ -99,8 +98,11 @@ export const AuthForm = ({
         password: values.password
       });
       console.log(res);
-      location.assign('/');
-      localStorage.setItem('shipam_profile', 'Logged In');
+      if (!user_type) {
+        location.assign(`${location.protocol}//${user_type}.${location.host}/`);
+      } else {
+        location.assign('/');
+      }
     },
     {
       successMessage: {

@@ -21,11 +21,13 @@ import { ImCart } from 'react-icons/im';
 
 export const LoggedInNavbar = ({
   type,
-  profile = { name: 'Martins Akeredolu' }
+  profile
 }: {
   type?: string;
-  profile?: any;
+  profile: any;
 }) => {
+  // const
+
   return (
     <Box
       className={styles.logged_in_navbar}
@@ -107,40 +109,54 @@ export const LoggedInNavbar = ({
             Search
           </Button>
         </InputGroup>
-        <HStack gap="2rem" color="#8B96A5">
-          <Link _hover={{ textDecoration: 'none' }} href="/account">
-            <VStack gap={'.7rem'}>
-              <FaUser fontSize={'2rem'} />
-              <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
-                Profile
-              </Text>
-            </VStack>
-          </Link>
-          <Link _hover={{ textDecoration: 'none' }} href="/inbox">
-            <VStack gap={'.7rem'}>
-              <BsChatLeftTextFill fontSize={'2rem'} />
-              <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
-                Message
-              </Text>
-            </VStack>
-          </Link>
-          <Link _hover={{ textDecoration: 'none' }} href="/orders">
-            <VStack gap={'.7rem'}>
-              <AiFillHeart fontSize={'2rem'} />
-              <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
-                Orders
-              </Text>
-            </VStack>
-          </Link>
-          <Link _hover={{ textDecoration: 'none' }} href="/cart">
-            <VStack gap={'.7rem'}>
-              <ImCart fontSize={'2rem'} />
-              <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
-                My Cart
-              </Text>
-            </VStack>
-          </Link>
-        </HStack>
+        {profile ? (
+          <HStack gap="2rem" color="#8B96A5">
+            <Link _hover={{ textDecoration: 'none' }} href="/account">
+              <VStack gap={'.7rem'}>
+                <FaUser fontSize={'2rem'} />
+                <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
+                  Profile
+                </Text>
+              </VStack>
+            </Link>
+            <Link _hover={{ textDecoration: 'none' }} href="/inbox">
+              <VStack gap={'.7rem'}>
+                <BsChatLeftTextFill fontSize={'2rem'} />
+                <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
+                  Message
+                </Text>
+              </VStack>
+            </Link>
+            <Link _hover={{ textDecoration: 'none' }} href="/orders">
+              <VStack gap={'.7rem'}>
+                <AiFillHeart fontSize={'2rem'} />
+                <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
+                  Orders
+                </Text>
+              </VStack>
+            </Link>
+            <Link _hover={{ textDecoration: 'none' }} href="/cart">
+              <VStack gap={'.7rem'}>
+                <ImCart fontSize={'2rem'} />
+                <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
+                  My Cart
+                </Text>
+              </VStack>
+            </Link>
+          </HStack>
+        ) : (
+          <Flex gap={'2rem'} className={styles.login_buttons}>
+            <Link href={'/auth/login'} className={styles.button}>
+              Sign In
+            </Link>
+            <Link
+              href={type ? `/auth/register` : '/auth/join-shipam'}
+              className={styles.button}
+            >
+              Join Shipam
+            </Link>
+          </Flex>
+        )}
       </Flex>
     </Box>
   );

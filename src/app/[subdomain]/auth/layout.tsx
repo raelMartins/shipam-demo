@@ -14,7 +14,7 @@ export default function AuthLayout({
 }) {
   return (
     <Flex minH={'100vh'} direction="column">
-      <Navbar user_type={params.subdomain} />
+      <Navbar user_type={params.subdomain} loggedout />
       <Flex
         direction={'column'}
         flex={'1'}

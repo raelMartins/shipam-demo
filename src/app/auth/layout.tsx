@@ -9,7 +9,7 @@ export default function AuthLayout({
 }) {
   return (
     <Flex minH={'100vh'} direction="column">
-      <Navbar />
+      <Navbar loggedout />
       <Flex
         direction={'column'}
         flex={'1'}
