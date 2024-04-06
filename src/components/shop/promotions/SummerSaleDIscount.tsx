@@ -2,7 +2,7 @@ import { Box, Flex, Heading, Text, VStack } from '@chakra-ui/react';
 import { IoArrowForward } from 'react-icons/io5';
 import { Button } from 'ui-lib';
 
-export const SummerSaleDIscount = () => {
+export const SummerSaleDIscount = ({ height = '24.7rem' }) => {
   return (
     <Flex
       borderRadius={'20px'}
@@ -10,7 +10,7 @@ export const SummerSaleDIscount = () => {
       bgPos={'center'}
       bgSize={'cover'}
       bgRepeat={'no-repeat'}
-      h="24.7rem"
+      h={height || '24.7rem'}
       w="100%"
       justify={'flex-end'}
       align={'center'}

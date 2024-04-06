@@ -18,6 +18,7 @@ import { Button } from 'ui-lib';
 import { BsChatLeftTextFill } from 'react-icons/bs';
 import { AiFillHeart } from 'react-icons/ai';
 import { ImCart } from 'react-icons/im';
+import { CategoryDropdown } from 'components/general_product/CategoryDropDown';
 
 export const LoggedInNavbar = ({
   type,
@@ -74,6 +75,7 @@ export const LoggedInNavbar = ({
           <Input
             type="text"
             flex="1"
+            w="100%"
             fontSize="1.6rem"
             p="2rem"
             borderRadius={'none'}
@@ -82,7 +84,7 @@ export const LoggedInNavbar = ({
             _focus={{ outline: 'none' }}
             _focusVisible={{ outline: 'none' }}
           />
-          <Select
+          {/* <Select
             placeholder="Select category"
             w="15rem"
             h="max-content"
@@ -97,7 +99,19 @@ export const LoggedInNavbar = ({
             <option value="category_1">Category 1</option>
             <option value="category_2">Category 2</option>
             <option value="category_#">Category 3</option>
-          </Select>
+          </Select> */}
+          <CategoryDropdown
+            placeholder="Select category"
+            w="15rem"
+            selectStyle={{
+              height: 'max-content',
+              fontSize: '1.6rem',
+              borderRadius: 'none',
+              outline: 'none',
+              border: 'none'
+            }}
+          />
+
           {/* <Button bg="var(--shipam-primary-red)" color="white">
             Search
           </Button> */}

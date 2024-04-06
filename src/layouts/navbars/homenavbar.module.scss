@@ -1,0 +1,33 @@
+.home_navbar {
+  .login_buttons {
+    .button {
+      font-size: 1.6rem;
+      font-weight: 400;
+      opacity: 0.95;
+      font-family: var(--font_segoe);
+      padding: 1.2rem 2.4rem;
+      border-radius: 2rem;
+      border: 0.16rem solid;
+      line-height: 100%;
+      transition: 0.3s;
+      &:hover,
+      &:active,
+      &:focus {
+        opacity: 1;
+        text-decoration: none;
+      }
+    }
+    .button:nth-child(1) {
+      color: #000000;
+      background-color: #ffffff4d;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .button:nth-child(2) {
+      background: var(--shipam-primary-red);
+      color: #ffffff;
+      border: none;
+    }
+  }
+}

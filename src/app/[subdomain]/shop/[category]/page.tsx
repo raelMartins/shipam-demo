@@ -1,4 +1,4 @@
-import { Box, Flex, VStack } from '@chakra-ui/react';
+import { Box, Center, Flex, Text, VStack } from '@chakra-ui/react';
 import { SidebarFilters } from 'components/shop/SidebarFilters';
 import { SearchListingCard } from 'components/shop/cards/SearchListingCard';
 import {
@@ -30,9 +30,24 @@ export default async function ShipamMarketPage({
       <SidebarFilters categories={categories} />
       <Box flex={'1'}>
         <VStack gap={'1rem'}>
-          {products.map((el: any, i: number) => (
-            <SearchListingCard key={i} data={el} category={params.category} />
-          ))}
+          {products.length <= 0 ? (
+            <Center
+              bg="#fff"
+              border=".1rem solid #DEE2E7"
+              p="1rem"
+              borderRadius={'.4rem'}
+              w="100%"
+              h="30vh"
+            >
+              <Text textTransform={'capitalize'}>
+                No products in this category
+              </Text>
+            </Center>
+          ) : (
+            products.map((el: any, i: number) => (
+              <SearchListingCard key={i} data={el} category={params.category} />
+            ))
+          )}
         </VStack>
       </Box>
     </Flex>

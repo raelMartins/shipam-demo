@@ -8,9 +8,6 @@ import { getValidSubdomain } from 'utils/helpers/subdomain';
 const PUBLIC_FILE = /\.(.*)$/; // Files
 
 export async function middleware(req: NextRequest) {
-  const token = getCookie('shipam_token');
-  //first fetch profile
-
   // Clone the URL
   const url = req.nextUrl.clone();
 

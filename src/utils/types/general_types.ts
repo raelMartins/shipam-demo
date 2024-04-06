@@ -13,3 +13,13 @@ export type FilterParams = {
   days?: string | number;
   search_term?: string;
 };
+
+export type ProductCategory = {
+  id: number;
+  name: string;
+  slug: string;
+  description: string;
+  image: any;
+  created_at: string;
+  updated_at: string;
+};
