@@ -20,7 +20,7 @@ export const HomeCategories = ({
       {categories.map((category, index) => (
         <Center
           as={Link}
-          // href={`${location.protocol}//buyer.${location.host}/shop/${category.slug}`}
+          href={`${location.protocol}//buyer.${location.host}/shop/${category.slug}`}
           key={category.id}
           border="1px solid #FFFFFF"
           background="#FFFFFF4D"
