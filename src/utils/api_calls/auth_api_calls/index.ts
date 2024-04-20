@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from './api_endpoints';
+import { BASE_URL } from '../api_endpoints';
 import { setCookie } from 'cookies-next';
 import { Token } from 'utils/types/general_types';
 

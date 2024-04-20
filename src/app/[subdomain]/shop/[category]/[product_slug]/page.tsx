@@ -1,10 +1,10 @@
 import { Box, Flex, VStack } from '@chakra-ui/react';
-import { SidebarFilters } from 'components/shop/SidebarFilters';
-import { SearchListingCard } from 'components/shop/cards/SearchListingCard';
-import { ProductOverview } from 'components/shop/product/ProductOverview';
-import { ProductTabs } from 'components/shop/product/ProductTabs';
-import { RelatedProducts } from 'components/shop/promotions/RelatedProducts';
-import { YouMayLikeSidebar } from 'components/shop/promotions/YouMayLikeSideBar';
+import { SidebarFilters } from 'components/buyer/shop/SidebarFilters';
+import { SearchListingCard } from 'components/buyer/shop/cards/SearchListingCard';
+import { ProductOverview } from 'components/buyer/shop/product/ProductOverview';
+import { ProductTabs } from 'components/buyer/shop/product/ProductTabs';
+import { RelatedProducts } from 'components/buyer/shop/promotions/RelatedProducts';
+import { YouMayLikeSidebar } from 'components/buyer/shop/promotions/YouMayLikeSideBar';
 import { get_product_by_slug } from 'utils/api_calls/product_api_calls';
 
 export default async function ShipamProductPage({

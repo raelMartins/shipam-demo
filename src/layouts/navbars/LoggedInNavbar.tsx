@@ -8,6 +8,7 @@ import {
   InputGroup,
   Link,
   Select,
+  Switch,
   Text,
   VStack
 } from '@chakra-ui/react';
@@ -19,6 +20,8 @@ import { BsChatLeftTextFill } from 'react-icons/bs';
 import { AiFillHeart } from 'react-icons/ai';
 import { ImCart } from 'react-icons/im';
 import { CategoryDropdown } from 'components/general_product/CategoryDropDown';
+import { useState } from 'react';
+import { UserTypeSwitch } from './UserTypeSwitch';
 
 export const LoggedInNavbar = ({
   type,
@@ -27,7 +30,84 @@ export const LoggedInNavbar = ({
   type?: string;
   profile: any;
 }) => {
-  // const
+  const QuickNav = () => {
+    return type == 'buyer' ? (
+      <HStack gap="2rem" color="#8B96A5">
+        <UserTypeSwitch type={type} />
+        <Link _hover={{ textDecoration: 'none' }} href="/account">
+          <VStack gap={'.7rem'}>
+            <FaUser fontSize={'2rem'} />
+            <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
+              Profile
+            </Text>
+          </VStack>
+        </Link>
+        <Link _hover={{ textDecoration: 'none' }} href="/inbox">
+          <VStack gap={'.7rem'}>
+            <BsChatLeftTextFill fontSize={'2rem'} />
+            <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
+              Message
+            </Text>
+          </VStack>
+        </Link>
+        <Link _hover={{ textDecoration: 'none' }} href="/orders">
+          <VStack gap={'.7rem'}>
+            <AiFillHeart fontSize={'2rem'} />
+            <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
+              Orders
+            </Text>
+          </VStack>
+        </Link>
+        <Link _hover={{ textDecoration: 'none' }} href="/cart">
+          <VStack gap={'.7rem'}>
+            <ImCart fontSize={'2rem'} />
+            <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
+              My Cart
+            </Text>
+          </VStack>
+        </Link>
+      </HStack>
+    ) : type == 'vendor' ? (
+      <HStack gap="2rem" color="#8B96A5">
+        <UserTypeSwitch type={type} />
+        <Link _hover={{ textDecoration: 'none' }} href="/account">
+          <VStack gap={'.7rem'}>
+            <FaUser fontSize={'2rem'} />
+            <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
+              Profile
+            </Text>
+          </VStack>
+        </Link>
+        <Link _hover={{ textDecoration: 'none' }} href="/inbox">
+          <VStack gap={'.7rem'}>
+            <BsChatLeftTextFill fontSize={'2rem'} />
+            <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
+              Message
+            </Text>
+          </VStack>
+        </Link>
+      </HStack>
+    ) : (
+      <HStack gap="2rem" color="#8B96A5">
+        <Link _hover={{ textDecoration: 'none' }} href="/account">
+          <VStack gap={'.7rem'}>
+            <FaUser fontSize={'2rem'} />
+            <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
+              Profile
+            </Text>
+          </VStack>
+        </Link>
+        <Link _hover={{ textDecoration: 'none' }} href="/inbox">
+          <VStack gap={'.7rem'}>
+            <BsChatLeftTextFill fontSize={'2rem'} />
+            <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
+              Message
+            </Text>
+          </VStack>
+        </Link>
+      </HStack>
+    );
+  };
 
   return (
     <Box
@@ -48,7 +128,9 @@ export const LoggedInNavbar = ({
         gap={'2rem'}
       >
         <Flex align={'center'} gap={'3rem'}>
-          <ShipamLogoDefault />
+          <Link href="/">
+            <ShipamLogoDefault />
+          </Link>
           {type && (
             <Box
               textTransform={'capitalize'}
@@ -124,51 +206,19 @@ export const LoggedInNavbar = ({
           </Button>
         </InputGroup>
         {profile ? (
-          <HStack gap="2rem" color="#8B96A5">
-            <Link _hover={{ textDecoration: 'none' }} href="/account">
-              <VStack gap={'.7rem'}>
-                <FaUser fontSize={'2rem'} />
-                <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
-                  Profile
-                </Text>
-              </VStack>
-            </Link>
-            <Link _hover={{ textDecoration: 'none' }} href="/inbox">
-              <VStack gap={'.7rem'}>
-                <BsChatLeftTextFill fontSize={'2rem'} />
-                <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
-                  Message
-                </Text>
-              </VStack>
-            </Link>
-            <Link _hover={{ textDecoration: 'none' }} href="/orders">
-              <VStack gap={'.7rem'}>
-                <AiFillHeart fontSize={'2rem'} />
-                <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
-                  Orders
-                </Text>
-              </VStack>
-            </Link>
-            <Link _hover={{ textDecoration: 'none' }} href="/cart">
-              <VStack gap={'.7rem'}>
-                <ImCart fontSize={'2rem'} />
-                <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
-                  My Cart
-                </Text>
-              </VStack>
-            </Link>
-          </HStack>
+          <QuickNav />
         ) : (
           <Flex gap={'2rem'} className={styles.login_buttons}>
-            <Link href={'/auth/login'} className={styles.button}>
+            <Button as={Link} href={'/auth/login'} className={styles.button}>
               Sign In
-            </Link>
-            <Link
+            </Button>
+            <Button
+              as={Link}
               href={type ? `/auth/register` : '/auth/join-shipam'}
               className={styles.button}
             >
               Join Shipam
-            </Link>
+            </Button>
           </Flex>
         )}
       </Flex>

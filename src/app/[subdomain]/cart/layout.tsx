@@ -6,16 +6,18 @@ import { LoggedInNavbar } from 'layouts/navbars/LoggedInNavbar';
 import { Navigation } from 'layouts/navbars/Navigation';
 import { Navbar } from 'layouts/navbars/Navbar';
 import { SidebarNav } from 'layouts/sidebars/SidebarNav';
-import { SavedForLater } from 'components/shop/promotions/SavedForLater';
+import { SavedForLater } from 'components/buyer/shop/promotions/SavedForLater';
 
-export default function ShopLayout({
-  children // will be a page or nested layout
+export default function CartLayout({
+  children, // will be a page or nested layout
+  params
 }: {
   children: React.ReactNode;
+  params: { subdomain: string };
 }) {
   return (
     <Flex minH={'100vh'} direction="column">
-      <Navbar user_type="buyer" />
+      <Navbar user_type={params.subdomain} />
       <Flex
         direction={'column'}
         flex={'1'}
@@ -26,7 +28,7 @@ export default function ShopLayout({
           <Navigation />
           <VStack alignItems={'flex-start'} maxW="119rem" w="100%">
             <Flex mb="10rem" gap="5rem" w="100%">
-              <SidebarNav />
+              <SidebarNav subdomain={params.subdomain} />
               {children}
             </Flex>
             <SavedForLater />

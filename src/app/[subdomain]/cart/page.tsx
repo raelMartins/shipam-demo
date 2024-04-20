@@ -1,7 +1,7 @@
 import { Box, Center, Flex, Text, VStack } from '@chakra-ui/react';
-import { CartListItem } from 'components/cart/CartListItem';
-import { SidebarFilters } from 'components/shop/SidebarFilters';
-import { SearchListingCard } from 'components/shop/cards/SearchListingCard';
+import { CartListItem } from 'components/buyer/cart/CartListItem';
+import { SidebarFilters } from 'components/buyer/shop/SidebarFilters';
+import { SearchListingCard } from 'components/buyer/shop/cards/SearchListingCard';
 
 export default function ShipamMarketPage({}) {
   const cart = [{}, {}, {}];

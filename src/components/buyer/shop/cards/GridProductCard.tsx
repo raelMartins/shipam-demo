@@ -60,6 +60,7 @@ export const GridProductCard = ({
         zIndex={'1'}
       >
         <AddToWishlistButton
+          product_id={product_details.id}
           style={{
             fontSize: '2rem',
             cursor: 'pointer',

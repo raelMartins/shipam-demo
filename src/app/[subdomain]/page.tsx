@@ -4,6 +4,10 @@ import { BasicFooter } from 'layouts/footers/BasicFooter';
 import { redirect } from 'next/navigation';
 
 export default function Home({ params }: { params: { subdomain: string } }) {
-  params.subdomain === 'buyer' ? redirect('/shop') : null;
+  params.subdomain === 'buyer'
+    ? redirect('/shop')
+    : params.subdomain === 'vendor'
+    ? redirect('/product/add')
+    : null;
   return <main className={styles.main}></main>;
 }

@@ -1,6 +1,6 @@
 import { Box, Center, Flex, Text, VStack } from '@chakra-ui/react';
-import { SidebarFilters } from 'components/shop/SidebarFilters';
-import { SearchListingCard } from 'components/shop/cards/SearchListingCard';
+import { SidebarFilters } from 'components/buyer/shop/SidebarFilters';
+import { SearchListingCard } from 'components/buyer/shop/cards/SearchListingCard';
 import {
   get_all_categories,
   get_one_category

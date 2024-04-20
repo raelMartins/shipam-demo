@@ -7,14 +7,16 @@ import { Navigation } from 'layouts/navbars/Navigation';
 import { Navbar } from 'layouts/navbars/Navbar';
 import { SidebarNav } from 'layouts/sidebars/SidebarNav';
 
-export default function FAQLayout({
-  children // will be a page or nested layout
+export default function ShopLayout({
+  children, // will be a page or nested layout
+  params
 }: {
   children: React.ReactNode;
+  params: { subdomain: string };
 }) {
   return (
     <Flex minH={'100vh'} direction="column">
-      <Navbar user_type="buyer" />
+      <Navbar user_type={params.subdomain} />
       <Flex
         direction={'column'}
         flex={'1'}
@@ -23,8 +25,7 @@ export default function FAQLayout({
       >
         <Box maxWidth={'148.4rem'} width={'100%'} margin="0rem auto">
           <Navigation />
-
-          <SidebarNav />
+          <SidebarNav subdomain={params.subdomain} />
           {children}
         </Box>
       </Flex>

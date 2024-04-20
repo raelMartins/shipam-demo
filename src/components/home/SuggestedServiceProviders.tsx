@@ -1,6 +1,6 @@
 import { Box, Grid, HStack, Heading, Text } from '@chakra-ui/react';
 import { ServiceProviderCard } from 'components/service_provider/ServiceProviderCard';
-import { GridProductCard } from 'components/shop/cards/GridProductCard';
+import { GridProductCard } from 'components/buyer/shop/cards/GridProductCard';
 import { VendorCard } from 'components/vendor/VendorCard';
 import Link from 'next/link';
 import { BsForward } from 'react-icons/bs';

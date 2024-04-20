@@ -56,6 +56,7 @@ export const SearchListingCard = ({
         cursor={'pointer'}
       >
         <AddToWishlistButton
+          product_id={product_details.id}
           style={{
             fontSize: '2rem',
             cursor: 'pointer',

@@ -1,9 +1,11 @@
 'use client';
-import { Badge, Box, Button, Flex } from '@chakra-ui/react';
+import { Badge, Box, Flex, Link } from '@chakra-ui/react';
 import { ShipamLogoDefault } from 'components/design_icons';
 import styles from './loggedoutnavbar.module.scss';
 import { useEffect, useRef } from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
+import { UserTypeSwitch } from './UserTypeSwitch';
+import { Button } from 'ui-lib';
 
 export const LoggedOutNavbar = ({ type }: { type?: string }) => {
   return (
@@ -24,8 +26,9 @@ export const LoggedOutNavbar = ({ type }: { type?: string }) => {
         margin="0rem auto"
       >
         <Flex align={'center'} gap={'3rem'}>
-          {/* <Link */}
-          <ShipamLogoDefault />
+          <Link href="/">
+            <ShipamLogoDefault />
+          </Link>
           {type && (
             <Box
               textTransform={'capitalize'}
@@ -42,12 +45,60 @@ export const LoggedOutNavbar = ({ type }: { type?: string }) => {
           )}
         </Flex>
         <Flex gap={'2rem'} className={styles.login_buttons}>
-          <Link href={'/auth/login'} className={styles.button}>
+          {type && <UserTypeSwitch type={type} />}
+          <Link
+            // as={Button}
+            href={'/auth/login'}
+            font-size="1.6rem"
+            fontWeight="400"
+            opacity="0.95"
+            fontFamily="var(--font_segoe)"
+            padding="1.2rem 2.4rem"
+            borderRadius="0.64rem"
+            border="0.16rem solid"
+            lineHeight="100%"
+            transition="0.3s"
+            color="var(--shipam-primary-red)"
+            _hover={{
+              opacity: '1',
+              textDecoration: 'none'
+            }}
+            _active={{
+              opacity: '1',
+              textDecoration: 'none'
+            }}
+            _focus={{
+              opacity: '1',
+              textDecoration: 'none'
+            }}
+          >
             Sign In
           </Link>
           <Link
             href={type ? `/auth/register` : '/auth/join-shipam'}
-            className={styles.button}
+            font-size="1.6rem"
+            fontWeight="400"
+            opacity="0.95"
+            fontFamily="var(--font_segoe)"
+            padding="1.2rem 2.4rem"
+            borderRadius="0.64rem"
+            border="0.16rem solid"
+            lineHeight="100%"
+            transition="0.3s"
+            background="var(--shipam-primary-red)"
+            color="#ffffff"
+            _hover={{
+              opacity: '1',
+              textDecoration: 'none'
+            }}
+            _active={{
+              opacity: '1',
+              textDecoration: 'none'
+            }}
+            _focus={{
+              opacity: '1',
+              textDecoration: 'none'
+            }}
           >
             Join Shipam
           </Link>

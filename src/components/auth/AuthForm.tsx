@@ -2,7 +2,6 @@
 
 import {
   Box,
-  Button,
   Card,
   CardBody,
   CardHeader,
@@ -20,6 +19,7 @@ import { Form, useFormik } from 'formik';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { Button } from 'ui-lib';
 import { login, register } from 'utils/api_calls/auth_api_calls';
 import { segoe } from 'utils/helpers/fonts';
 import { catch_async_error } from 'utils/helpers/helper_functions';
@@ -33,6 +33,7 @@ export const AuthForm = ({
   user_type: string;
 }) => {
   const [accepted_terms, set_accepted_terms] = useState(false);
+  const [loading, setLoading] = useState(false);
   const validateForm = (values: any) => {
     const errors: any = {};
     if (auth_type === 'sign_up' && !accepted_terms) {
@@ -71,18 +72,24 @@ export const AuthForm = ({
 
   const create_account = catch_async_error(
     async (e: any, values: any) => {
-      const res = await register({
-        user_type,
-        firstname: values.firstname,
-        lastname: values.lastname,
-        phone_number: values.phone_number,
-        email: values.email,
-        password: values.password,
-        password_confirmation: values.password_confirmation,
-        agree_terms: 1
-      });
-      console.log(res);
-      location.assign('/');
+      try {
+        setLoading(true);
+        const res = await register({
+          user_type,
+          firstname: values.firstname,
+          lastname: values.lastname,
+          phone_number: values.phone_number,
+          email: values.email,
+          password: values.password,
+          password_confirmation: values.password_confirmation,
+          agree_terms: 1
+        });
+        console.log(res);
+        location.assign('/');
+      } catch (err) {
+        setLoading(false);
+        throw err;
+      }
     },
     {
       successMessage: {
@@ -93,15 +100,23 @@ export const AuthForm = ({
 
   const login_to_account = catch_async_error(
     async (e: any, values: any) => {
-      let res = await login({
-        email: values.email,
-        password: values.password
-      });
-      console.log(res);
-      if (!user_type) {
-        location.assign(`${location.protocol}//${user_type}.${location.host}/`);
-      } else {
-        location.assign('/');
+      try {
+        setLoading(true);
+        let res = await login({
+          email: values.email,
+          password: values.password
+        });
+        console.log(res);
+        if (!user_type) {
+          location.assign(
+            `${location.protocol}//${user_type}.${location.host}/`
+          );
+        } else {
+          location.assign('/');
+        }
+      } catch (err) {
+        setLoading(false);
+        throw err;
       }
     },
     {
@@ -182,6 +197,7 @@ export const AuthForm = ({
                   </FormLabel>
                   <FormErrorWrapper
                     ChildComponent={Input}
+                    type="password"
                     bg="#F9F9F9"
                     borderRadius=".64rem"
                     padding="1.6rem"
@@ -300,6 +316,7 @@ export const AuthForm = ({
                   </FormLabel>
                   <FormErrorWrapper
                     ChildComponent={Input}
+                    type="password"
                     bg="#F9F9F9"
                     borderRadius=".64rem"
                     padding="1.6rem"
@@ -322,6 +339,7 @@ export const AuthForm = ({
                   </FormLabel>
                   <FormErrorWrapper
                     ChildComponent={Input}
+                    type="password"
                     bg="#F9F9F9"
                     borderRadius=".64rem"
                     padding="1.6rem"
@@ -355,7 +373,8 @@ export const AuthForm = ({
               _hover={{ backgroundColor: 'var(--shipam-primary-red)' }}
               _active={{ backgroundColor: 'var(--shipam-primary-red)' }}
               _focus={{ backgroundColor: 'var(--shipam-primary-red)' }}
-              onClick={(e) => formik.handleSubmit()}
+              onClick={(e: any) => formik.handleSubmit()}
+              isLoading={loading}
               isDisabled={auth_type === 'sign_up' && !accepted_terms}
             >
               {auth_type.split('_').join(' ')}

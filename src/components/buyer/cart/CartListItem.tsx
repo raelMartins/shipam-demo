@@ -12,7 +12,7 @@ import {
   Text,
   VStack
 } from '@chakra-ui/react';
-import { AddToWishlistButton } from 'components/shop/cards/AddToWishlistButton';
+import { AddToWishlistButton } from 'components/buyer/shop/cards/AddToWishlistButton';
 import { StarRatings } from 'components/widgets/widgets';
 import Image from 'next/image';
 import { QuantityMenu } from './QuantityMenu';

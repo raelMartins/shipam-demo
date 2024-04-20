@@ -12,8 +12,8 @@ import {
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import { StarRatings } from 'components/widgets/widgets';
-import { AddToWishlistButton } from 'components/shop/cards/AddToWishlistButton';
-import { AddToCartButton } from 'components/shop/cards/AddToCartButton';
+import { AddToWishlistButton } from 'components/buyer/shop/cards/AddToWishlistButton';
+import { AddToCartButton } from 'components/buyer/shop/cards/AddToCartButton';
 
 export const VendorCard = ({
   data,

@@ -9,9 +9,11 @@ import { PopularProducts } from 'components/home/PopularProducts';
 import { HotDeals } from 'components/home/HotDeals';
 import { SuggestedVendors } from 'components/home/SuggestedVendors';
 import { SuggestedServiceProviders } from 'components/home/SuggestedServiceProviders';
-import { SummerSaleDIscount } from 'components/shop/promotions/SummerSaleDIscount';
+import { SummerSaleDIscount } from 'components/buyer/shop/promotions/SummerSaleDIscount';
 import { PromotionalDeals } from 'components/home/PromotionalDeals';
 import { Button } from 'ui-lib';
+import { SubscribeToNewsletter } from 'layouts/footers/SubscribeToNewsletter';
+import { PrimaryFooter } from 'layouts/footers/PrimaryFooter';
 
 export default async function Home() {
   const categories = await get_all_categories();
@@ -46,6 +48,8 @@ export default async function Home() {
             </Center>
           </Box>
         </Flex>
+        <SubscribeToNewsletter />
+        <PrimaryFooter />
         <BasicFooter />
       </Flex>
     </main>

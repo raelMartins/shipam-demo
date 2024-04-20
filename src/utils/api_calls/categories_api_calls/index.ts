@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from './api_endpoints';
+import { BASE_URL } from '../api_endpoints';
 import { FilterParams } from 'utils/types/general_types';
 
 export const get_all_categories = async (data: FilterParams = {}) => {
