@@ -22,6 +22,9 @@ import { ImCart } from 'react-icons/im';
 import { CategoryDropdown } from 'components/general_product/CategoryDropDown';
 import { useState } from 'react';
 import { UserTypeSwitch } from './UserTypeSwitch';
+import { useRouter } from 'next/navigation';
+import { IoAdd, IoAddCircle } from 'react-icons/io5';
+import { IoMdAdd } from 'react-icons/io';
 
 export const LoggedInNavbar = ({
   type,
@@ -30,6 +33,7 @@ export const LoggedInNavbar = ({
   type?: string;
   profile: any;
 }) => {
+  const router = useRouter();
   const QuickNav = () => {
     return type == 'buyer' ? (
       <HStack gap="2rem" color="#8B96A5">
@@ -78,11 +82,11 @@ export const LoggedInNavbar = ({
             </Text>
           </VStack>
         </Link>
-        <Link _hover={{ textDecoration: 'none' }} href="/inbox">
+        <Link _hover={{ textDecoration: 'none' }} href="/product/add">
           <VStack gap={'.7rem'}>
-            <BsChatLeftTextFill fontSize={'2rem'} />
+            <IoAddCircle fontSize={'2rem'} />
             <Text fontSize={'1.2rem'} lineHeight={'1.4rem'}>
-              Message
+              Product
             </Text>
           </VStack>
         </Link>
@@ -208,15 +212,15 @@ export const LoggedInNavbar = ({
         {profile ? (
           <QuickNav />
         ) : (
-          <Flex gap={'2rem'} className={styles.login_buttons}>
-            <Button as={Link} href={'/auth/login'} className={styles.button}>
+          <Flex gap={'2rem'}>
+            {type && <UserTypeSwitch type={type} />}
+            <Button
+              variant={'outline'}
+              onClick={() => router.push('/auth/login')}
+            >
               Sign In
             </Button>
-            <Button
-              as={Link}
-              href={type ? `/auth/register` : '/auth/join-shipam'}
-              className={styles.button}
-            >
+            <Button onClick={() => router.push('/auth/register')}>
               Join Shipam
             </Button>
           </Flex>

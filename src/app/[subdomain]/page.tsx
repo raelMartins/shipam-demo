@@ -7,7 +7,7 @@ export default function Home({ params }: { params: { subdomain: string } }) {
   params.subdomain === 'buyer'
     ? redirect('/shop')
     : params.subdomain === 'vendor'
-    ? redirect('/product/add')
+    ? redirect('/account')
     : null;
   return <main className={styles.main}></main>;
 }

@@ -25,8 +25,10 @@ export default function AccountLayout({
       >
         <Box maxWidth={'148.4rem'} width={'100%'} margin="0rem auto">
           <Navigation />
-          <SidebarNav subdomain={params.subdomain} />
-          {children}
+          <Flex w="100%" gap="2rem">
+            <SidebarNav subdomain={params.subdomain} />
+            {children}
+          </Flex>
         </Box>
       </Flex>
       <SubscribeToNewsletter />

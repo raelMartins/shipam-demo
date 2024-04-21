@@ -126,38 +126,43 @@ export const CreateProductForm = () => {
 
   const create_product = catch_async_error(
     async (values: any) => {
-      set_loading(true);
-      console.log(values);
-      const {
-        description,
-        minimum_order_quantity,
-        name,
-        price,
-        product_category_id,
-        stock_size
-      } = values;
-      const form_data = new FormData();
+      try {
+        set_loading(true);
+        console.log(values);
+        const {
+          description,
+          minimum_order_quantity,
+          name,
+          price,
+          product_category_id,
+          stock_size
+        } = values;
+        const form_data = new FormData();
 
-      form_data.append('description', description);
-      form_data.append('minimum_order_quantity', minimum_order_quantity);
-      form_data.append('name', name);
-      form_data.append('price', price);
-      form_data.append('product_category_id', product_category_id);
-      form_data.append('stock_size', stock_size);
-      form_data.append('user_id', user_id as string);
-      form_data.append('currency', 'USD');
-      form_data.append('metric', 'KG');
-      for (let i = 0; i < all_specs.length; i++) {
-        form_data.append('specifications[]', all_specs[i].name);
-        form_data.append('specification_value[]', all_specs[i].value);
-      }
-      for (var pair of form_data.entries()) {
-        console.log(pair[0] + ' - ' + pair[1]);
-      }
-      const res = await create_new_product(form_data);
+        form_data.append('description', description);
+        form_data.append('minimum_order_quantity', minimum_order_quantity);
+        form_data.append('name', name);
+        form_data.append('price', price);
+        form_data.append('product_category_id', product_category_id);
+        form_data.append('stock_size', stock_size);
+        form_data.append('user_id', user_id as string);
+        form_data.append('currency', 'USD');
+        form_data.append('metric', 'KG');
+        for (let i = 0; i < all_specs.length; i++) {
+          form_data.append('specifications[]', all_specs[i].name);
+          form_data.append('specification_value[]', all_specs[i].value);
+        }
+        for (var pair of form_data.entries()) {
+          console.log(pair[0] + ' - ' + pair[1]);
+        }
+        const res = await create_new_product(form_data);
 
-      console.log(res);
-      set_loading(false);
+        console.log(res);
+        set_loading(false);
+      } catch (err) {
+        set_loading(false);
+        throw err;
+      }
     },
     {
       successMessage: {
@@ -311,7 +316,7 @@ export const CreateProductForm = () => {
         <Button
           borderRadius="1rem"
           p="2.4rem"
-          isDisabled={!complete || all_specs.length === 0}
+          isDisabled={!complete || all_specs.length === 0 || loading}
           onClick={(e: any) => formik.handleSubmit()}
           isLoading={loading}
         >
