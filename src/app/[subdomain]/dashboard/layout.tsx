@@ -7,7 +7,7 @@ import { Navigation } from 'layouts/navbars/Navigation';
 import { Navbar } from 'layouts/navbars/Navbar';
 import { SidebarNav } from 'layouts/sidebars/SidebarNav';
 
-export default function ShopLayout({
+export default function DashbordLayout({
   children, // will be a page or nested layout
   params
 }: {
@@ -25,8 +25,10 @@ export default function ShopLayout({
       >
         <Box maxWidth={'148.4rem'} width={'100%'} margin="0rem auto">
           <Navigation />
-          <SidebarNav subdomain={params.subdomain} />
-          {children}
+          <Flex w="100%" gap="2rem">
+            <SidebarNav subdomain={params.subdomain} />
+            {children}
+          </Flex>
         </Box>
       </Flex>
       <SubscribeToNewsletter />
