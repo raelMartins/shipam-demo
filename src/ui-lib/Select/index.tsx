@@ -39,6 +39,7 @@ export const Select = ({
           cursor: 'pointer',
           ...selectStyle
         }}
+        {...rest}
       >
         {' '}
         {children}

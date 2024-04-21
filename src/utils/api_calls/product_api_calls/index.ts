@@ -49,15 +49,12 @@ export const get_product_by_id = async (data: FilterParams) => {
   return response?.data;
 };
 
-export const get_product_by_slug = async (data: FilterParams) => {
-  const { product_slug } = data;
-
-  const res = await fetch(
-    `${BASE_URL}/products/product/fetch/${product_slug}`,
-    {
-      method: 'GET'
-    }
-  );
+export const create_new_product = async (data: any) => {
+  const res = await fetch(`${BASE_URL}/products/store`, {
+    method: 'POST',
+    body: data,
+    headers: { 'Content-Type': 'multipart/form-data' }
+  });
 
   const response = await res.json();
   return response?.data;
